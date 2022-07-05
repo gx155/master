@@ -16,7 +16,7 @@ spring:
       # 是否启用配置中心
       enabled: ${SPRING_CLOUD_CONFIG_ENABLED:false}
       # 配置中心地址
-      uri: ${SPRING_CLOUD_CONFIG_URI:http://172.22.3.156:8010}
+      uri: ${SPRING_CLOUD_CONFIG_URI:http://172.31.218.25:8010}
       retry:
         # 最大重试次数
         maxAttempts: 6
@@ -50,7 +50,7 @@ eureka:
   client:
     serviceUrl:
       # 注册中心地址
-      defaultZone: ${EUREKA_DEFAULT_ZONE:http://172.22.3.156:8000/eureka}
+      defaultZone: ${EUREKA_DEFAULT_ZONE:http://172.31.218.25:8000/eureka}
     registryFetchIntervalSeconds: 10
     disable-delta: true
 

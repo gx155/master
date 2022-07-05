@@ -28,6 +28,11 @@
             <artifactId>hzero-starter-dynamic-route</artifactId>
         </dependency>
 
+        <!--编码规则-->
+        <dependency>
+            <groupId>org.hzero.boot</groupId>
+            <artifactId>hzero-boot-platform</artifactId>
+        </dependency>
 
         <!-- 依赖服务列表 -->
         <dependency>

@@ -2,13 +2,13 @@ spring:
   cloud:
     inetutils:
       ignored-interfaces[0]: lo
-      preferred-networks[0]: ${SPRING_CLOUD_INETUTILS_PREFERRED_NETWORKS:10.221}
+      preferred-networks[0]: ${SPRING_CLOUD_INETUTILS_PREFERRED_NETWORKS:10.218}
   application:
-    name: hfins-study${SUFFIX_EMPLOYEE_CODE:}
+    name: hfins-study-37799${SUFFIX_EMPLOYEE_CODE:}
   datasource:
-    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://172.22.3.156:3306/hfins?useUnicode=true&characterEncoding=utf-8&useSSL=false}
-    username:  ${SPRING_DATASOURCE_USERNAME:root}
-    password: ${SPRING_DATASOURCE_PASSWORD:root}
+    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://172.31.218.25:3306/hfins?useUnicode=true&characterEncoding=utf-8&useSSL=false}
+    username:  ${SPRING_DATASOURCE_USERNAME:hzero}
+    password: ${SPRING_DATASOURCE_PASSWORD:hzero}
     hikari:
       # 连接池最小空闲连接数
       minimum-idle: ${SPRING_DATASOURCE_MINIMUM_IDLE:20}
@@ -17,7 +17,7 @@ spring:
       # 等待连接池分配连接的最大时长（毫秒）
       connection-timeout: ${SPRING_DATASOURCE_CONNECTION_TIMEOUT:30000}
   redis:
-    host: ${SPRING_REDIS_HOST:172.22.3.156}
+    host: ${SPRING_REDIS_HOST:172.31.218.25}
     port: ${SPRING_REDIS_PORT:6379}
     database: ${SPRING_REDIS_DATABASE:9}
     jedis:

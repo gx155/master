@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hand.study.infra.mapper.CompanyMapper">
+
+
+    <sql id = "BaseSql">
+        fc.COMPANY_ID,
+        fc.COMPANY_CODE,
+        fc.COMPANY_SHORT_NAME,
+        fc.COMPANY_FULL_NAME,
+        fc.MAG_ORG_ID,
+        fc.ADDRESS,
+        fc.COMPANY_LEVEL_ID,
+        fc.PARENT_COMPANY_ID,
+        fc.SYSTEM_TIMEZONE_ID,
+        fc.LANGUAGE,
+        fc.MANAGING_CURRENCY,
+        fc.CHIEF_POSITION_ID,
+        fc.START_DATE_ACTIVE,
+        fc.END_DATE_ACTIVE,
+        fc.COMPANY_INFO_URL,
+        fc.TENANT_ID,
+        fc.creation_date,
+        fc.created_by,
+        fc.last_updated_by,
+        fc.last_update_date,
+        fc.object_version_number
+    </sql>
+
+    <select id = "selectList" resultType = "com.hand.study.domain.entity.Company">
+        select
+        <include refid = "BaseSql"/>
+        from fnd_company fc
+        <where>
+            <if test="companyId !=null">
+                and fc.COMPANY_ID = #{companyId,jdbcType = INTEGER}
+            </if>
+            <if test="companyCode !=null">
+                and fc.COMPANY_CODE = #{companyCode,jdbcType = VARCHAR}
+            </if>
+            <if test="companyShortName !=null">
+                and fc.COMPANY_SHORT_NAME = #{companyShortName,jdbcType = VARCHAR}
+            </if>
+            <if test="companyFullName !=null">
+                and fc.COMPANY_FULL_NAME = #{companyFullName,jdbcType = VARCHAR}
+            </if>
+            <if test="magOrgId !=null">
+                and fc.MAG_ORG_ID = #{magOrgId,jdbcType = INTEGER}
+            </if>
+            <if test="address !=null">
+                and fc.ADDRESS = #{address,jdbcType = VARCHAR}
+            </if>
+            <if test="companyLevelId !=null">
+                and fc.COMPANY_LEVEL_ID = #{companyLevelId,jdbcType = INTEGER}
+            </if>
+            <if test="parentCompanyId !=null">
+                and fc.PARENT_COMPANY_ID = #{parentCompanyId,jdbcType = INTEGER}
+            </if>
+            <if test="systemTimezoneId !=null">
+                and fc.SYSTEM_TIMEZONE_ID = #{systemTimezoneId,jdbcType = INTEGER}
+            </if>
+            <if test="language !=null">
+                and fc.LANGUAGE = #{language,jdbcType = VARCHAR}
+            </if>
+            <if test="managingCurrency !=null">
+                and fc.MANAGING_CURRENCY = #{managingCurrency,jdbcType = VARCHAR}
+            </if>
+            <if test="chiefPositionId !=null">
+                and fc.CHIEF_POSITION_ID = #{chiefPositionId,jdbcType = INTEGER}
+            </if>
+            <if test="startDateActive !=null">
+                and fc.START_DATE_ACTIVE = #{startDateActive,jdbcType = TIMESTAMP}
+            </if>
+            <if test="endDateActive !=null">
+                and fc.END_DATE_ACTIVE = #{endDateActive,jdbcType = TIMESTAMP}
+            </if>
+            <if test="companyInfoUrl !=null">
+                and fc.COMPANY_INFO_URL = #{companyInfoUrl,jdbcType = VARCHAR}
+            </if>
+            <if test="tenantId !=null">
+                and fc.TENANT_ID = #{tenantId,jdbcType = INTEGER}
+            </if>
+        </where>
+    </select>
+</mapper>
+

@@ -1,8 +1,11 @@
 package com.hand.study.app.service;
 
+import com.hand.study.api.dto.ExportSheet;
+import com.hand.study.api.dto.HeaderIdStatusDTO;
 import io.choerodon.core.domain.Page;
 import io.choerodon.mybatis.pagehelper.domain.PageRequest;
 import com.hand.study.domain.entity.PaymentHeader37799;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -26,9 +29,14 @@ public interface PaymentHeader37799Service {
     /**
      * 保存数据
      *
-     * @param paymentHeader37799s 数据
+     * @param paymentHeader37799 数据
      */
-    void saveData(List<PaymentHeader37799> paymentHeader37799s);
+    void saveData(PaymentHeader37799 paymentHeader37799);
 
+    void statusUpdateByHeaderId(HeaderIdStatusDTO headerIdStatusDTO);
+
+    void deleteSlipByHeaderId(@Param("headerId") Long headerId);
+
+    List<ExportSheet> selectRTFData();
 }
 

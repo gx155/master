@@ -1,5 +1,6 @@
 package com.hand.study.infra.mapper;
 
+import com.hand.study.api.dto.ExportSheet;
 import io.choerodon.mybatis.common.BaseMapper;
 import com.hand.study.domain.entity.PaymentLine37799;
 
@@ -19,5 +20,7 @@ public interface PaymentLine37799Mapper extends BaseMapper<PaymentLine37799> {
      * @return 返回值
      */
     List<PaymentLine37799> selectList(PaymentLine37799 paymentLine37799);
+
+    ExportSheet selectRTFData();
 }
 

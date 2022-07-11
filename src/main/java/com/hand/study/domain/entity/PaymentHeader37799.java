@@ -1,7 +1,5 @@
 package com.hand.study.domain.entity;
 
-import java.util.Date;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.choerodon.mybatis.annotation.ModifyAudit;
 import io.choerodon.mybatis.annotation.MultiLanguage;
@@ -10,15 +8,17 @@ import io.choerodon.mybatis.annotation.VersionAudit;
 import io.choerodon.mybatis.domain.AuditDomain;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import org.springframework.data.annotation.Transient;
+import org.hzero.export.annotation.ExcelColumn;
+import org.hzero.export.annotation.ExcelSheet;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 单据表(PaymentHeader37799)实体类
@@ -33,6 +33,7 @@ import java.util.Date;
 @MultiLanguage
 @JsonInclude(value = JsonInclude.Include.NON_NULL)
 @Table(name = "hfm_payment_header_37799")
+@ExcelSheet(zh = "sheet页",en = "demo")
 public class PaymentHeader37799 extends AuditDomain {
     private static final long serialVersionUID = 532700646039302644L;
 
@@ -58,47 +59,63 @@ public class PaymentHeader37799 extends AuditDomain {
 
     @ApiModelProperty(value = "付款单号", required = true)
     @NotBlank
+    @ExcelColumn
     private String paymentNumber;
 
     @ApiModelProperty(value = "公司")
+    @ExcelColumn
     private Long companyId;
 
     @ApiModelProperty(value = "部门")
+    @ExcelColumn
     private Long unitId;
 
     @ApiModelProperty(value = "岗位")
+    @ExcelColumn
     private Long positionId;
 
     @ApiModelProperty(value = "员工")
+    @ExcelColumn
     private Long employeeId;
 
     @ApiModelProperty(value = "核算主体")
+    @ExcelColumn
     private String accountingEntity;
 
     @ApiModelProperty(value = "申请日期")
+    @ExcelColumn
     private Date dateOfApplication;
 
     @ApiModelProperty(value = "付款申请单类型")
+    @ExcelColumn
     private String paymentType;
 
     @ApiModelProperty(value = "币种")
+    @ExcelColumn
     private String currency;
 
     @ApiModelProperty(value = "审批日期")
+    @ExcelColumn
     private Date approvalDate;
 
     @ApiModelProperty(value = "单据状态")
+    @ExcelColumn
     private String paymentStatus;
 
     @MultiLanguageField
+    @ExcelColumn
     @ApiModelProperty(value = "交易附言(多语言)")
     private String paymentTransaction;
 
     @ApiModelProperty(value = "租户ID")
+    @ExcelColumn
     private Long tenantId;
 
     @Transient
     private BigDecimal amountCount;
+
+    @Transient
+    private List<PaymentLine37799> paymentLine37799List;
 
 
     public Long getHeaderId() {
@@ -213,5 +230,20 @@ public class PaymentHeader37799 extends AuditDomain {
         this.tenantId = tenantId;
     }
 
+    public BigDecimal getAmountCount() {
+        return amountCount;
+    }
+
+    public void setAmountCount(BigDecimal amountCount) {
+        this.amountCount = amountCount;
+    }
+
+    public List<PaymentLine37799> getPaymentLine37799List() {
+        return paymentLine37799List;
+    }
+
+    public void setPaymentLine37799List(List<PaymentLine37799> paymentLine37799List) {
+        this.paymentLine37799List = paymentLine37799List;
+    }
 }
 

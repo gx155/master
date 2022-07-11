@@ -47,4 +47,6 @@ public class PaymentHeader37799Vo {
 
     @ApiModelProperty(value = "单据状态")
     private String paymentStatus;
+
+    private String currentCode;
 }

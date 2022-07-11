@@ -27,4 +27,12 @@ public interface PaymentLine37799Repository extends BaseRepository<PaymentLine37
      * @return 返回值
      */
     PaymentLine37799 selectByPrimary(Long lineId);
+
+
+    /**
+     * 付款单行删除API
+     *
+     * @param lineId
+     */
+    void deleteByLineId(Long lineId);
 }

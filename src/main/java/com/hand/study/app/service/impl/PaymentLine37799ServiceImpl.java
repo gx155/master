@@ -24,7 +24,9 @@ public class PaymentLine37799ServiceImpl implements PaymentLine37799Service {
     private PaymentLine37799Repository paymentLine37799Repository;
 
     @Override
-    public Page<PaymentLine37799> selectList(PageRequest pageRequest, PaymentLine37799 paymentLine37799) {
+    public Page<PaymentLine37799> selectList(PageRequest pageRequest, Long headerId) {
+        PaymentLine37799 paymentLine37799 = new PaymentLine37799();
+        paymentLine37799.setHeaderId(headerId);
         return PageHelper.doPageAndSort(pageRequest, () -> paymentLine37799Repository.selectList(paymentLine37799));
     }
 

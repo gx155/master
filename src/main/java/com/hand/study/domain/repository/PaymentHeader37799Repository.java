@@ -35,8 +35,15 @@ public interface PaymentHeader37799Repository extends BaseRepository<PaymentHead
 
     void insertDate(EntryInformationDTO entryInformationDTO);
 
-    EntryInformationDTO selectByPaymentNumber(Long paymentNumber);
+    EntryInformationDTO selectAllByHeaderId(Long headerId);
 
     void updateEntryInformation(EntryInformationDTO entryInformationDTO);
 
+    PaymentHeader37799 selectByHeaderId(Long headerId);
+
+    /**
+     * 导出
+     * @return
+     */
+    List<EntryInformationDTO> selectAllInfo();
 }

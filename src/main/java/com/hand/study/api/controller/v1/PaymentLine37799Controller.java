@@ -37,22 +37,30 @@ public class PaymentLine37799Controller extends BaseController {
     @Autowired
     private PaymentLine37799Service paymentLine37799Service;
 
-    @ApiOperation(value = "单据行表列表")
+    @ApiOperation(value = "付款单行查询API")
     @Permission(level = ResourceLevel.ORGANIZATION)
-    @GetMapping
-    public ResponseEntity<Page<PaymentLine37799>> list(PaymentLine37799 paymentLine37799, @PathVariable Long organizationId, @ApiIgnore @SortDefault(value = PaymentLine37799.FIELD_LINE_ID,
+    @GetMapping("/{headerId}")
+    public ResponseEntity<Page<PaymentLine37799>> list(@PathVariable Long organizationId, @PathVariable("headerId") Long headerId, @ApiIgnore @SortDefault(value = PaymentLine37799.FIELD_LINE_ID,
             direction = Sort.Direction.DESC) PageRequest pageRequest) {
-        Page<PaymentLine37799> list = paymentLine37799Service.selectList(pageRequest, paymentLine37799);
+        Page<PaymentLine37799> list = paymentLine37799Service.selectList(pageRequest, headerId);
         return Results.success(list);
     }
 
-    @ApiOperation(value = "单据行表明细")
+    @ApiOperation(value = "付款单行删除API")
     @Permission(level = ResourceLevel.ORGANIZATION)
-    @GetMapping("/{lineId}")
-    public ResponseEntity<PaymentLine37799> detail(@PathVariable Long lineId) {
-        PaymentLine37799 paymentLine37799 = paymentLine37799Repository.selectByPrimary(lineId);
-        return Results.success(paymentLine37799);
+    @DeleteMapping
+    public void remove(@PathVariable Long organizationId,@RequestBody PaymentLine37799 paymentLine37799) {
+        SecurityTokenHelper.validToken(paymentLine37799);
+        paymentLine37799Repository.deleteByLineId(paymentLine37799.getLineId());
     }
+
+//    @ApiOperation(value = "单据行表明细")
+//    @Permission(level = ResourceLevel.ORGANIZATION)
+//    @GetMapping("/{lineId}")
+//    public ResponseEntity<PaymentLine37799> detail(@PathVariable Long lineId) {
+//        PaymentLine37799 paymentLine37799 = paymentLine37799Repository.selectByPrimary(lineId);
+//        return Results.success(paymentLine37799);
+//    }
 
     @ApiOperation(value = "创建或更新单据行表")
     @Permission(level = ResourceLevel.ORGANIZATION)
@@ -65,14 +73,6 @@ public class PaymentLine37799Controller extends BaseController {
         return Results.success(paymentLine37799s);
     }
 
-    @ApiOperation(value = "删除单据行表")
-    @Permission(level = ResourceLevel.ORGANIZATION)
-    @DeleteMapping
-    public ResponseEntity<?> remove(@RequestBody List<PaymentLine37799> paymentLine37799s) {
-        SecurityTokenHelper.validToken(paymentLine37799s);
-        paymentLine37799Repository.batchDeleteByPrimaryKey(paymentLine37799s);
-        return Results.success();
-    }
 
 }
 

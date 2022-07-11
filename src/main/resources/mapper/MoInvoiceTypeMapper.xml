@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hand.study.infra.mapper.MoInvoiceTypeMapper">
+
+
+    <sql id = "BaseSql">
+        amit.MO_INVOICE_TYPE_ID,
+        amit.MAG_ORG_ID,
+        amit.MO_INVOICE_TYPE_CODE,
+        amit.DESCRIPTION,
+        amit.CURRENCY_CODE,
+        amit.INVOICE_TYPE,
+        amit.PAGE_TEMPLATE,
+        amit.SOURCE_TYPE,
+        amit.JE_ACC_TEMPLATE,
+        amit.REPORT_NAME,
+        amit.PAYEE_CATEGORY,
+        amit.PAYMENT_METHOD_ID,
+        amit.DIFFERENCE_FLAG,
+        amit.DIFFERENCE_CODE,
+        amit.POSITIVE_DIFFERENCE,
+        amit.NEGATIVE_DIFFERENCE,
+        amit.INVOICE_GROUP_FLAG,
+        amit.INVESTMENT_PLAN_CONTROL,
+        amit.AUTO_APPROVE_FLAG,
+        amit.AUTO_AUDIT_FLAG,
+        amit.ADJUSTMENT_FLAG,
+        amit.PAYMENT_FLAG,
+        amit.FROZEN_FLAG,
+        amit.RESERVE_BUDGET,
+        amit.BUDGET_CONTROL_ENABLED,
+        amit.ICON,
+        amit.CAPTION_HDS_ID,
+        amit.ENABLED_FLAG,
+        amit.BUSINESS_CATEGORY,
+        amit.TEMPORARY_MODEL,
+        amit.REVERSE_PLAN,
+        amit.TEMPORARY_TAX,
+        amit.REQUEST_ID,
+        amit.PROGRAM_ID,
+        amit.LAST_UPDATE_LOGIN,
+        amit.DOC_SCAN_FLAG,
+        amit.tenant_id,
+        amit.creation_date,
+        amit.created_by,
+        amit.last_updated_by,
+        amit.last_update_date,
+        amit.object_version_number
+    </sql>
+
+    <select id = "selectList" resultType = "com.hand.study.domain.entity.MoInvoiceType">
+        select
+        <include refid = "BaseSql"/>
+        from acp_mo_invoice_type amit
+        <where>
+            <if test="moInvoiceTypeId !=null">
+                and amit.MO_INVOICE_TYPE_ID = #{moInvoiceTypeId,jdbcType = INTEGER}
+            </if>
+            <if test="magOrgId !=null">
+                and amit.MAG_ORG_ID = #{magOrgId,jdbcType = INTEGER}
+            </if>
+            <if test="moInvoiceTypeCode !=null">
+                and amit.MO_INVOICE_TYPE_CODE = #{moInvoiceTypeCode,jdbcType = VARCHAR}
+            </if>
+            <if test="description !=null">
+                and amit.DESCRIPTION = #{description,jdbcType = VARCHAR}
+            </if>
+            <if test="currencyCode !=null">
+                and amit.CURRENCY_CODE = #{currencyCode,jdbcType = VARCHAR}
+            </if>
+            <if test="invoiceType !=null">
+                and amit.INVOICE_TYPE = #{invoiceType,jdbcType = VARCHAR}
+            </if>
+            <if test="pageTemplate !=null">
+                and amit.PAGE_TEMPLATE = #{pageTemplate,jdbcType = VARCHAR}
+            </if>
+            <if test="sourceType !=null">
+                and amit.SOURCE_TYPE = #{sourceType,jdbcType = VARCHAR}
+            </if>
+            <if test="jeAccTemplate !=null">
+                and amit.JE_ACC_TEMPLATE = #{jeAccTemplate,jdbcType = VARCHAR}
+            </if>
+            <if test="reportName !=null">
+                and amit.REPORT_NAME = #{reportName,jdbcType = VARCHAR}
+            </if>
+            <if test="payeeCategory !=null">
+                and amit.PAYEE_CATEGORY = #{payeeCategory,jdbcType = VARCHAR}
+            </if>
+            <if test="paymentMethodId !=null">
+                and amit.PAYMENT_METHOD_ID = #{paymentMethodId,jdbcType = INTEGER}
+            </if>
+            <if test="differenceFlag !=null">
+                and amit.DIFFERENCE_FLAG = #{differenceFlag,jdbcType = VARCHAR}
+            </if>
+            <if test="differenceCode !=null">
+                and amit.DIFFERENCE_CODE = #{differenceCode,jdbcType = VARCHAR}
+            </if>
+            <if test="positiveDifference !=null">
+                and amit.POSITIVE_DIFFERENCE = #{positiveDifference,jdbcType = OTHER}
+            </if>
+            <if test="negativeDifference !=null">
+                and amit.NEGATIVE_DIFFERENCE = #{negativeDifference,jdbcType = OTHER}
+            </if>
+            <if test="invoiceGroupFlag !=null">
+                and amit.INVOICE_GROUP_FLAG = #{invoiceGroupFlag,jdbcType = VARCHAR}
+            </if>
+            <if test="investmentPlanControl !=null">
+                and amit.INVESTMENT_PLAN_CONTROL = #{investmentPlanControl,jdbcType = VARCHAR}
+            </if>
+            <if test="autoApproveFlag !=null">
+                and amit.AUTO_APPROVE_FLAG = #{autoApproveFlag,jdbcType = VARCHAR}
+            </if>
+            <if test="autoAuditFlag !=null">
+                and amit.AUTO_AUDIT_FLAG = #{autoAuditFlag,jdbcType = VARCHAR}
+            </if>
+            <if test="adjustmentFlag !=null">
+                and amit.ADJUSTMENT_FLAG = #{adjustmentFlag,jdbcType = VARCHAR}
+            </if>
+            <if test="paymentFlag !=null">
+                and amit.PAYMENT_FLAG = #{paymentFlag,jdbcType = VARCHAR}
+            </if>
+            <if test="frozenFlag !=null">
+                and amit.FROZEN_FLAG = #{frozenFlag,jdbcType = VARCHAR}
+            </if>
+            <if test="reserveBudget !=null">
+                and amit.RESERVE_BUDGET = #{reserveBudget,jdbcType = VARCHAR}
+            </if>
+            <if test="budgetControlEnabled !=null">
+                and amit.BUDGET_CONTROL_ENABLED = #{budgetControlEnabled,jdbcType = VARCHAR}
+            </if>
+            <if test="icon !=null">
+                and amit.ICON = #{icon,jdbcType = VARCHAR}
+            </if>
+            <if test="captionHdsId !=null">
+                and amit.CAPTION_HDS_ID = #{captionHdsId,jdbcType = INTEGER}
+            </if>
+            <if test="enabledFlag !=null">
+                and amit.ENABLED_FLAG = #{enabledFlag,jdbcType = VARCHAR}
+            </if>
+            <if test="businessCategory !=null">
+                and amit.BUSINESS_CATEGORY = #{businessCategory,jdbcType = VARCHAR}
+            </if>
+            <if test="temporaryModel !=null">
+                and amit.TEMPORARY_MODEL = #{temporaryModel,jdbcType = VARCHAR}
+            </if>
+            <if test="reversePlan !=null">
+                and amit.REVERSE_PLAN = #{reversePlan,jdbcType = VARCHAR}
+            </if>
+            <if test="temporaryTax !=null">
+                and amit.TEMPORARY_TAX = #{temporaryTax,jdbcType = VARCHAR}
+            </if>
+            <if test="requestId !=null">
+                and amit.REQUEST_ID = #{requestId,jdbcType = INTEGER}
+            </if>
+            <if test="programId !=null">
+                and amit.PROGRAM_ID = #{programId,jdbcType = INTEGER}
+            </if>
+            <if test="lastUpdateLogin !=null">
+                and amit.LAST_UPDATE_LOGIN = #{lastUpdateLogin,jdbcType = INTEGER}
+            </if>
+            <if test="docScanFlag !=null">
+                and amit.DOC_SCAN_FLAG = #{docScanFlag,jdbcType = VARCHAR}
+            </if>
+            <if test="tenantId !=null">
+                and amit.tenant_id = #{tenantId,jdbcType = INTEGER}
+            </if>
+        </where>
+    </select>
+</mapper>
+

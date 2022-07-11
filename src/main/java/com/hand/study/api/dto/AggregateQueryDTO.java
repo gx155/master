@@ -1,5 +1,6 @@
 package com.hand.study.api.dto;
 
+import com.google.gson.annotations.Since;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,21 +27,24 @@ public class AggregateQueryDTO {
 
     //"编号"
     private String requisitionNumber;
+
     //"单据类型id"
     private Long moPayReqTypeId;
+
     //单据类型
     private String moPayReqType;
-    //"申请人id"
+
+    //"申请人"
     private String employeeId;
-    //"CNY"
+
+    //"币种"
     private String currencyCode;
+
     //创建日期
     private Date createdDateFrom;
     private Date createdDateTo;
 
-    //申请日期
-    private String requisitionDateFrom;
-    private String requisitionDateTo;
+
 
 
 }

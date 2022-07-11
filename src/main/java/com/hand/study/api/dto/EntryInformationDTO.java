@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 /**
  * @author: XIN.GONG@HAND-CHINA.COM
  * @description 头行信息录入
@@ -16,5 +18,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class EntryInformationDTO {
     PaymentHeader37799 paymentHeader37799;
-    PaymentLine37799 paymentLine37799;
+    List<PaymentLine37799> paymentLine37799;
 }

@@ -22,10 +22,12 @@ public interface PaymentHeader37799Mapper extends BaseMapper<PaymentHeader37799>
      */
     List<PaymentHeader37799> selectList(PaymentHeader37799 paymentHeader37799);
 
-    List<PaymentHeader37799Vo> selectDataByPaymentTransaction(AggregateQueryDTO aggregateQueryDTO);
+    List<PaymentHeader37799Vo> selectDataByPayment(AggregateQueryDTO aggregateQueryDTO);
 
     String selectUnitName(Long unitId);
 
     String selectMoPayReqTypeById(Long moPayReqTypeId);
+
+    PaymentHeader37799 selectByHeaderId(Long headerId);
 }
 

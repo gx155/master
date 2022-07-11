@@ -18,10 +18,10 @@ public interface PaymentLine37799Service {
      * 查询数据
      *
      * @param pageRequest       分页参数
-     * @param paymentLine37799s 查询条件
+     * @param headerId 查询条件
      * @return 返回值
      */
-    Page<PaymentLine37799> selectList(PageRequest pageRequest, PaymentLine37799 paymentLine37799s);
+    Page<PaymentLine37799> selectList(PageRequest pageRequest, Long headerId);
 
     /**
      * 保存数据

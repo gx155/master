@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hand.study.infra.mapper.OrgUnitMapper">
+
+
+    <sql id = "BaseSql">
+        eou.UNIT_ID,
+        eou.COMPANY_ID,
+        eou.UNIT_CODE,
+        eou.UNIT_TYPE_ID,
+        eou.DESCRIPTION,
+        eou.PARENT_UNIT_ID,
+        eou.CHIEF_POSITION_ID,
+        eou.ORG_UNIT_LEVEL_ID,
+        eou.ENABLED_FLAG,
+        eou.TENANT_ID,
+        eou.source_code,
+        eou.source_header_id,
+        eou.source_line_id,
+        eou.source_reference,
+        eou.creation_date,
+        eou.created_by,
+        eou.last_updated_by,
+        eou.last_update_date,
+        eou.object_version_number
+    </sql>
+
+    <select id = "selectList" resultType = "com.hand.study.domain.entity.OrgUnit">
+        select
+        <include refid = "BaseSql"/>
+        from exp_org_unit eou
+        <where>
+            <if test="unitId !=null">
+                and eou.UNIT_ID = #{unitId,jdbcType = INTEGER}
+            </if>
+            <if test="companyId !=null">
+                and eou.COMPANY_ID = #{companyId,jdbcType = INTEGER}
+            </if>
+            <if test="unitCode !=null">
+                and eou.UNIT_CODE = #{unitCode,jdbcType = VARCHAR}
+            </if>
+            <if test="unitTypeId !=null">
+                and eou.UNIT_TYPE_ID = #{unitTypeId,jdbcType = INTEGER}
+            </if>
+            <if test="description !=null">
+                and eou.DESCRIPTION = #{description,jdbcType = VARCHAR}
+            </if>
+            <if test="parentUnitId !=null">
+                and eou.PARENT_UNIT_ID = #{parentUnitId,jdbcType = INTEGER}
+            </if>
+            <if test="chiefPositionId !=null">
+                and eou.CHIEF_POSITION_ID = #{chiefPositionId,jdbcType = INTEGER}
+            </if>
+            <if test="orgUnitLevelId !=null">
+                and eou.ORG_UNIT_LEVEL_ID = #{orgUnitLevelId,jdbcType = INTEGER}
+            </if>
+            <if test="enabledFlag !=null">
+                and eou.ENABLED_FLAG = #{enabledFlag,jdbcType = VARCHAR}
+            </if>
+            <if test="tenantId !=null">
+                and eou.TENANT_ID = #{tenantId,jdbcType = INTEGER}
+            </if>
+            <if test="sourceCode !=null">
+                and eou.source_code = #{sourceCode,jdbcType = VARCHAR}
+            </if>
+            <if test="sourceHeaderId !=null">
+                and eou.source_header_id = #{sourceHeaderId,jdbcType = INTEGER}
+            </if>
+            <if test="sourceLineId !=null">
+                and eou.source_line_id = #{sourceLineId,jdbcType = INTEGER}
+            </if>
+            <if test="sourceReference !=null">
+                and eou.source_reference = #{sourceReference,jdbcType = VARCHAR}
+            </if>
+        </where>
+    </select>
+</mapper>
+

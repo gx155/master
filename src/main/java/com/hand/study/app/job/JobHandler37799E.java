@@ -58,7 +58,7 @@ public class JobHandler37799E implements IJobHandler {
 
             invoiceLine37799s1.forEach(invoiceLine37799 -> {
                 invoiceLine37799.setInvoiceDate(new Date());
-                
+
             });
             System.out.println("PAY带参数！");
             //获取单据状态为APPROVE的数据

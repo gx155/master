@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hand.study.infra.mapper.InvoiceHeader37799Mapper">
+
+
+    <sql id = "BaseSql">
+        hih3.header_id,
+        hih3.invoice_number,
+        hih3.company_id,
+        hih3.unit_id,
+        hih3.position_id,
+        hih3.employee_id,
+        hih3.acc_entity_id,
+        hih3.date_of_application,
+        hih3.invoice_type,
+        hih3.currency,
+        hih3.approval_date,
+        hih3.invoice_status,
+        hih3.invoice_transaction,
+        hih3.TENANT_ID,
+        hih3.creation_date,
+        hih3.created_by,
+        hih3.last_updated_by,
+        hih3.last_update_date,
+        hih3.object_version_number
+    </sql>
+
+    <select id = "selectList" resultType = "com.hand.study.domain.entity.InvoiceHeader37799">
+        <bind name="lang" value="@io.choerodon.mybatis.helper.LanguageHelper@language()"/>
+        select
+        <include refid = "BaseSql"/>
+        from hfm_invoice_header_37799 hih3
+        LEFT JOIN hfm_invoice_header_37799_tl hih3l
+        on hih3.header_id = hih3l.header_id
+        and hih3l.lang = #{lang}
+        LEFT JOIN fnd_company fc
+        ON hih3.company_id = fc.COMPANY_ID
+        LEFT JOIN exp_org_unit eou
+        ON hih3.unit_id = eou.unit_id
+        LEFT JOIN exp_org_position eop
+        ON hih3.position_id = eop.position_id
+        LEFT JOIN exp_employee ee
+        ON hih3.employee_id = ee.employee_id
+        LEFT JOIN gld_accounting_entity gae
+        ON hih3.acc_entity_id = gae.acc_entity_id
+        LEFT JOIN gld_accounting_entity_tl gael
+        ON gae.acc_entity_id = gael.acc_entity_id
+        and gael.lang = #{lang}
+        LEFT JOIN acp_mo_invoice_type amit
+        ON hih3.invoice_type = amit.DESCRIPTION
+        LEFT JOIN acp_mo_invoice_type_tl amitl
+        ON amit.MO_INVOICE_TYPE_ID = amitl.MO_INVOICE_TYPE_ID
+        and hih3l.lang = #{lang}
+        <where>
+            <if test="headerId !=null">
+                and hih3.header_id = #{headerId,jdbcType = INTEGER}
+            </if>
+        </where>
+    </select>
+    <select id="selectAllList" resultType="com.hand.study.domain.entity.InvoiceHeader37799">
+        select hih.invoice_number invoiceNumber,
+               hih.invoice_type invoiceType,
+               hih.unit_id unitId,
+               hih.employee_id employeeId,
+               hih.acc_entity_id accEntityId,
+               hih.date_of_application dateOfApplication,
+               hih.invoice_status,
+               hih.currency currencyCode,
+               SUM(hil.amount) amountSum
+        from hfm_invoice_header_37799 hih
+        join hfm_invoice_line_37799 hil
+        on hih.header_id = hil.header_id
+        <where>
+            <if test="description != null">
+                AND hih.invoice_transaction LIKE concat(concat('%',#{description}),'%')
+            </if>
+            <if test="requisitionNumber != null">
+                and hih.invoice_number like concat(concat('%',#{invoice_number}),'%')
+            </if>
+            <if test="moPayReqType != null">
+                and invoice_type = #{moPayReqType}
+            </if>
+            <if test="currencyCode != null">
+                and hih.currency = #{currencyCode}
+            </if>
+            <if test="requisitionDateFrom != null">
+                and #{requisitionDateFrom} &lt;= hih.date_of_application
+            </if>
+            <if test="requisitionDateTo != null">
+                and hih.date_of_application &lt;= #{requisitionDateTo}
+            </if>
+        </where>
+        GROUP BY
+        hih.invoice_number,
+        hih.invoice_type,
+        hih.unit_id,
+        hih.employee_id,
+        hih.acc_entity_id,
+        hih.date_of_application,
+        hih.invoice_status,
+        hih.currency
+        <if test="amountFrom != null and amountTo != null">
+            having sum(hil.amount) BETWEEN #{amountFrom} and #{amountTo}
+        </if>
+
+
+    </select>
+    <select id="selectAllDate" resultType="com.hand.study.domain.entity.InvoiceHeaderLineVo">
+        SELECT
+            hih3.invoice_number invoiceNumber,
+            fc.COMPANY_SHORT_NAME companyName,
+            ee.NAME employeeName,
+            eop.POSITION_CODE positionName,
+            gae.ACC_ENTITY_NAME accEntityName,
+            amit.INVOICE_TYPE invoiceType,
+            hih3.invoice_transaction invoiceTransaction,
+            hil3.line_id lineNumber,
+            hil3.amount amount,
+            cpm.DESCRIPTION invoiceMethod
+        FROM
+            hfm_invoice_header_37799 hih3
+                LEFT JOIN fnd_company fc ON hih3.company_id = fc.COMPANY_ID
+                LEFT JOIN exp_employee ee ON hih3.employee_id = ee.employee_id
+                LEFT JOIN exp_org_position eop ON hih3.position_id = eop.POSITION_ID
+                LEFT JOIN gld_accounting_entity gae ON hih3.acc_entity_id = gae.acc_entity_id
+                LEFT JOIN acp_mo_invoice_type amit ON hih3.INVOICE_TYPE = amit.MO_INVOICE_TYPE_ID
+                LEFT JOIN hfm_invoice_line_37799 hil3 ON hih3.header_id = hil3.header_id
+                LEFT JOIN csh_payment_method cpm ON hil3.invoice_method = cpm.PAYMENT_METHOD_ID
+    </select>
+</mapper>
+

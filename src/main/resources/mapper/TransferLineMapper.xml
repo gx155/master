@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hand.study.infra.mapper.TransferLineMapper">
+
+
+    <sql id = "BaseSql">
+        htl.transfer_line_id,
+        htl.transfer_header_id,
+        htl.line_number,
+        htl.transfer_acc_entity_id,
+        htl.transfer_bank_account_num,
+        htl.transfer_bank_account_name,
+        htl.transfer_bank_account_code,
+        htl.transfer_money,
+        htl.actual_transfer_money,
+        htl.transfer_cash_plan_item_id,
+        htl.transfer_cash_flow_term_id,
+        htl.retreat_acc_entity_id,
+        htl.retreat_bank_account_code,
+        htl.retreat_money,
+        htl.actual_retreat_money,
+        htl.retreat_cash_plan_item_id,
+        htl.retreat_cash_flow_term_id,
+        htl.payment_method_id,
+        htl.payment_date,
+        htl.payment_status,
+        htl.plan_transfer_date,
+        htl.close_status,
+        htl.description,
+        htl.creation_date,
+        htl.created_by,
+        htl.last_updated_by,
+        htl.last_update_date,
+        htl.object_version_number
+    </sql>
+
+    <select id = "selectList" resultType = "com.hand.study.domain.entity.TransferLine">
+        select
+        <include refid = "BaseSql"/>
+        from hfm_transfer_line htl
+        <where>
+            <if test="transferLineId !=null">
+                and htl.transfer_line_id = #{transferLineId,jdbcType = INTEGER}
+            </if>
+            <if test="transferHeaderId !=null">
+                and htl.transfer_header_id = #{transferHeaderId,jdbcType = INTEGER}
+            </if>
+            <if test="lineNumber !=null">
+                and htl.line_number = #{lineNumber,jdbcType = INTEGER}
+            </if>
+            <if test="transferAccEntityId !=null">
+                and htl.transfer_acc_entity_id = #{transferAccEntityId,jdbcType = INTEGER}
+            </if>
+            <if test="transferBankAccountNum !=null">
+                and htl.transfer_bank_account_num = #{transferBankAccountNum,jdbcType = VARCHAR}
+            </if>
+            <if test="transferBankAccountName !=null">
+                and htl.transfer_bank_account_name = #{transferBankAccountName,jdbcType = VARCHAR}
+            </if>
+            <if test="transferBankAccountCode !=null">
+                and htl.transfer_bank_account_code = #{transferBankAccountCode,jdbcType = VARCHAR}
+            </if>
+            <if test="transferMoney !=null">
+                and htl.transfer_money = #{transferMoney,jdbcType = OTHER}
+            </if>
+            <if test="actualTransferMoney !=null">
+                and htl.actual_transfer_money = #{actualTransferMoney,jdbcType = OTHER}
+            </if>
+            <if test="transferCashPlanItemId !=null">
+                and htl.transfer_cash_plan_item_id = #{transferCashPlanItemId,jdbcType = INTEGER}
+            </if>
+            <if test="transferCashFlowTermId !=null">
+                and htl.transfer_cash_flow_term_id = #{transferCashFlowTermId,jdbcType = INTEGER}
+            </if>
+            <if test="retreatAccEntityId !=null">
+                and htl.retreat_acc_entity_id = #{retreatAccEntityId,jdbcType = INTEGER}
+            </if>
+            <if test="retreatBankAccountCode !=null">
+                and htl.retreat_bank_account_code = #{retreatBankAccountCode,jdbcType = VARCHAR}
+            </if>
+            <if test="retreatMoney !=null">
+                and htl.retreat_money = #{retreatMoney,jdbcType = OTHER}
+            </if>
+            <if test="actualRetreatMoney !=null">
+                and htl.actual_retreat_money = #{actualRetreatMoney,jdbcType = OTHER}
+            </if>
+            <if test="retreatCashPlanItemId !=null">
+                and htl.retreat_cash_plan_item_id = #{retreatCashPlanItemId,jdbcType = INTEGER}
+            </if>
+            <if test="retreatCashFlowTermId !=null">
+                and htl.retreat_cash_flow_term_id = #{retreatCashFlowTermId,jdbcType = INTEGER}
+            </if>
+            <if test="paymentMethodId !=null">
+                and htl.payment_method_id = #{paymentMethodId,jdbcType = INTEGER}
+            </if>
+            <if test="paymentDate !=null">
+                and htl.payment_date = #{paymentDate,jdbcType = OTHER}
+            </if>
+            <if test="paymentStatus !=null">
+                and htl.payment_status = #{paymentStatus,jdbcType = VARCHAR}
+            </if>
+            <if test="planTransferDate !=null">
+                and htl.plan_transfer_date = #{planTransferDate,jdbcType = OTHER}
+            </if>
+            <if test="closeStatus !=null">
+                and htl.close_status = #{closeStatus,jdbcType = VARCHAR}
+            </if>
+            <if test="description !=null">
+                and htl.description = #{description,jdbcType = VARCHAR}
+            </if>
+        </where>
+    </select>
+</mapper>
+

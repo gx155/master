@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hand.study.infra.mapper.PaymentHeader37799Mapper">
+
+
+    <sql id = "BaseSql">
+        hph3.header_id,
+        hph3.payment_number,
+        hph3.company_id,
+        hph3.unit_id,
+        hph3.position_id,
+        hph3.employee_id,
+        hph3.accounting_entity,
+        hph3.date_of_application,
+        hph3.payment_type,
+        hph3.currency,
+        hph3.approval_date,
+        hph3.payment_status,
+        hph3.payment_transaction,
+        hph3.TENANT_ID,
+        hph3.creation_date,
+        hph3.created_by,
+        hph3.last_updated_by,
+        hph3.last_update_date,
+        hph3.object_version_number
+    </sql>
+
+    <select id = "selectList" resultType = "com.hand.study.domain.entity.PaymentHeader37799">
+        select
+        <include refid = "BaseSql"/>
+        from hfm_payment_header_37799 hph3
+        <where>
+            <if test="headerId !=null">
+                and hph3.header_id = #{headerId,jdbcType = INTEGER}
+            </if>
+            <if test="paymentNumber !=null">
+                and hph3.payment_number = #{paymentNumber,jdbcType = VARCHAR}
+            </if>
+            <if test="companyId !=null">
+                and hph3.company_id = #{companyId,jdbcType = INTEGER}
+            </if>
+            <if test="unitId !=null">
+                and hph3.unit_id = #{unitId,jdbcType = INTEGER}
+            </if>
+            <if test="positionId !=null">
+                and hph3.position_id = #{positionId,jdbcType = INTEGER}
+            </if>
+            <if test="employeeId !=null">
+                and hph3.employee_id = #{employeeId,jdbcType = INTEGER}
+            </if>
+            <if test="accountingEntity !=null">
+                and hph3.accounting_entity = #{accountingEntity,jdbcType = VARCHAR}
+            </if>
+            <if test="dateOfApplication !=null">
+                and hph3.date_of_application = #{dateOfApplication,jdbcType = TIMESTAMP}
+            </if>
+            <if test="paymentType !=null">
+                and hph3.payment_type = #{paymentType,jdbcType = VARCHAR}
+            </if>
+            <if test="currency !=null">
+                and hph3.currency = #{currency,jdbcType = VARCHAR}
+            </if>
+            <if test="approvalDate !=null">
+                and hph3.approval_date = #{approvalDate,jdbcType = TIMESTAMP}
+            </if>
+            <if test="paymentStatus !=null">
+                and hph3.payment_status = #{paymentStatus,jdbcType = VARCHAR}
+            </if>
+            <if test="paymentTransaction !=null">
+                and hph3.payment_transaction = #{paymentTransaction,jdbcType = VARCHAR}
+            </if>
+            <if test="tenantId !=null">
+                and hph3.TENANT_ID = #{tenantId,jdbcType = INTEGER}
+            </if>
+        </where>
+    </select>
+    <select id="selectDataByPayment" resultType="com.hand.study.domain.entity.PaymentHeader37799Vo">
+        select hph.payment_number paymentNumber,hph.payment_type paymentType,hph.unit_id unitId,hph.accounting_entity
+        accountingEntity,
+        hph.date_of_application dateOfApplication,hpl.amount,hph.payment_status,hph.currency currencyCode
+        from hfm_payment_header_37799 hph
+        join hfm_payment_line_37799 hpl
+        on hph.header_id = hpl.header_id
+        <where>
+            <if test="description != null">
+                AND hph.payment_transaction LIKE concat(concat('%',#{description}),'%')
+            </if>
+            <if test="requisitionNumber != null">
+                and hph.payment_number like concat(concat('%',#{payment_number}),'%')
+            </if>
+            <if test="moPayReqType != null">
+                and payment_type = #{moPayReqType}
+            </if>
+            <if test="currencyCode != null">
+                and hph.currency = #{currencyCode}
+            </if>
+            <if test="requisitionDateFrom != null">
+                and #{requisitionDateFrom} &lt;= hph.date_of_application
+            </if>
+            <if test="requisitionDateTo != null">
+                and hph.date_of_application &lt;= #{requisitionDateTo}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectUnitName" resultType="java.lang.String">
+        select DESCRIPTION
+        from exp_org_unit
+        <where>
+            <if test="unitId != null" >
+                and UNIT_ID = #{unitId}
+            </if>
+        </where>
+    </select>
+    <select id="selectMoPayReqTypeById" resultType="java.lang.String">
+        select moPayReq_Type
+        from acp_mo_payment_type
+        <where>
+            <if test="moPayReqTypeId != null">
+                and moPayReqType_Id = #{moPayReqTypeId}
+            </if>
+        </where>
+    </select>
+    <select id="selectByHeaderId" resultType="com.hand.study.domain.entity.PaymentHeader37799">
+        <bind name="lang" value="@io.choerodon.mybatis.helper.LanguageHelper@language()"/>
+        SELECT
+        hph3.header_id,
+        hph3.payment_number,
+        hph3.company_id,
+        fc.COMPANY_SHORT_NAME AS company_name,
+        hph3.unit_id,
+        eou.DESCRIPTION AS unit_name,
+        hph3.position_id,
+        eop.DESCRIPTION AS position_name,
+        hph3.employee_id,
+        ee.`NAME` AS employee_name,
+        hph3.accounting_entity,
+        gael.ACC_ENTITY_NAME,
+        hph3.date_of_application,
+        ctcl.DESCRIPTION AS mo_csh_trx_class_name,
+        hph3.currency,
+        hph3.payment_status,
+        hpl3.line_id,
+        hpl3.header_id,
+        hpl3.line_number,
+        hpl3.pay_flag,
+        hpl3.amount,
+        hpl3.payment_date
+        FROM
+        hfm_payment_header_37799 hph3
+        LEFT JOIN hfm_payment_header_37799_tl hph3l
+        ON hph3l.header_id = hph3.header_id
+        AND hph3l.lang = #{lang}
+        LEFT JOIN hfm_payment_line_37799 hpl3
+        ON hph3.header_id = hpl3.header_id
+        LEFT JOIN fnd_company fc
+        ON hph3.company_id = fc.COMPANY_ID
+        LEFT JOIN exp_employee ee
+        ON hph3.employee_id = ee.EMPLOYEE_ID
+        LEFT JOIN exp_org_unit eou
+        ON hph3.unit_id = eou.UNIT_ID
+        LEFT JOIN exp_org_position eop
+        ON hph3.position_id = eop.POSITION_ID
+        LEFT JOIN gld_accounting_entity gae
+        ON hph3.accounting_entity = gae.ACC_ENTITY_ID
+        LEFT JOIN gld_accounting_entity_tl gael
+        ON gael.accounting_entity = gae.ACC_ENTITY_ID
+        AND gael.lang = #{lang}
+        <where>
+            <if test="headerId != null">
+                hph3.header_id = #{headerId}
+            </if>
+        </where>
+    </select>
+
+
+
+</mapper>
+

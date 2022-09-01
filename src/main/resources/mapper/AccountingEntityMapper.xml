@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hand.study.infra.mapper.AccountingEntityMapper">
+
+
+    <sql id = "BaseSql">
+        gae.ACC_ENTITY_ID,
+        gae.ACC_ENTITY_CODE,
+        gae.ACC_ENTITY_NAME,
+        gae.FUNCTIONAL_CURRENCY_CODE,
+        gae.PAY_CURRENCY_CODE,
+        gae.COMPANY_TYPE,
+        gae.START_DATE_ACTIVE,
+        gae.END_DATE_ACTIVE,
+        gae.DEFAULT_SET_OF_BOOKS_ID,
+        gae.DEFAULT_TIMEZONE_ID,
+        gae.DEFAULT_LANGUAGE,
+        gae.DEFAULT_COUNTRY_CODE,
+        gae.TAXPAYER_TYPE,
+        gae.TAXPAYER_NUMBER,
+        gae.PHONE,
+        gae.ADDRESS,
+        gae.BANK_ACCOUNT,
+        gae.TENANT_ID,
+        gae.district_code,
+        gae.company_nature_code,
+        gae.factory_code,
+        gae.creation_date,
+        gae.created_by,
+        gae.last_updated_by,
+        gae.last_update_date,
+        gae.object_version_number
+    </sql>
+
+    <select id = "selectList" resultType = "com.hand.study.domain.entity.AccountingEntity">
+        select
+        <include refid = "BaseSql"/>
+        from gld_accounting_entity gae
+        <where>
+            <if test="accEntityId !=null">
+                and gae.ACC_ENTITY_ID = #{accEntityId,jdbcType = INTEGER}
+            </if>
+            <if test="accEntityCode !=null">
+                and gae.ACC_ENTITY_CODE = #{accEntityCode,jdbcType = VARCHAR}
+            </if>
+            <if test="accEntityName !=null">
+                and gae.ACC_ENTITY_NAME = #{accEntityName,jdbcType = VARCHAR}
+            </if>
+            <if test="functionalCurrencyCode !=null">
+                and gae.FUNCTIONAL_CURRENCY_CODE = #{functionalCurrencyCode,jdbcType = VARCHAR}
+            </if>
+            <if test="payCurrencyCode !=null">
+                and gae.PAY_CURRENCY_CODE = #{payCurrencyCode,jdbcType = VARCHAR}
+            </if>
+            <if test="companyType !=null">
+                and gae.COMPANY_TYPE = #{companyType,jdbcType = VARCHAR}
+            </if>
+            <if test="startDateActive !=null">
+                and gae.START_DATE_ACTIVE = #{startDateActive,jdbcType = TIMESTAMP}
+            </if>
+            <if test="endDateActive !=null">
+                and gae.END_DATE_ACTIVE = #{endDateActive,jdbcType = TIMESTAMP}
+            </if>
+            <if test="defaultSetOfBooksId !=null">
+                and gae.DEFAULT_SET_OF_BOOKS_ID = #{defaultSetOfBooksId,jdbcType = INTEGER}
+            </if>
+            <if test="defaultTimezoneId !=null">
+                and gae.DEFAULT_TIMEZONE_ID = #{defaultTimezoneId,jdbcType = INTEGER}
+            </if>
+            <if test="defaultLanguage !=null">
+                and gae.DEFAULT_LANGUAGE = #{defaultLanguage,jdbcType = VARCHAR}
+            </if>
+            <if test="defaultCountryCode !=null">
+                and gae.DEFAULT_COUNTRY_CODE = #{defaultCountryCode,jdbcType = VARCHAR}
+            </if>
+            <if test="taxpayerType !=null">
+                and gae.TAXPAYER_TYPE = #{taxpayerType,jdbcType = VARCHAR}
+            </if>
+            <if test="taxpayerNumber !=null">
+                and gae.TAXPAYER_NUMBER = #{taxpayerNumber,jdbcType = VARCHAR}
+            </if>
+            <if test="phone !=null">
+                and gae.PHONE = #{phone,jdbcType = VARCHAR}
+            </if>
+            <if test="address !=null">
+                and gae.ADDRESS = #{address,jdbcType = VARCHAR}
+            </if>
+            <if test="bankAccount !=null">
+                and gae.BANK_ACCOUNT = #{bankAccount,jdbcType = VARCHAR}
+            </if>
+            <if test="tenantId !=null">
+                and gae.TENANT_ID = #{tenantId,jdbcType = INTEGER}
+            </if>
+            <if test="districtCode !=null">
+                and gae.district_code = #{districtCode,jdbcType = VARCHAR}
+            </if>
+            <if test="companyNatureCode !=null">
+                and gae.company_nature_code = #{companyNatureCode,jdbcType = VARCHAR}
+            </if>
+            <if test="factoryCode !=null">
+                and gae.factory_code = #{factoryCode,jdbcType = VARCHAR}
+            </if>
+        </where>
+    </select>
+</mapper>
+
